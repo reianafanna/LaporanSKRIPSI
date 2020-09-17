@@ -1,0 +1,112 @@
+	
+<?php
+
+include_once 'koneksi.php';
+
+
+include_once 'header.php';
+
+
+$a = "PKT/".date('ymd')."/".time();
+$b = $_POST['nm'];
+$c = $_POST['al'];
+$d = $_POST['em'];
+$e = $_POST['hp'];
+$f = $_POST['lm'];
+$g = $_POST['hrg'];
+$h = $_POST['jml'];
+$i = $_POST['tglt'];
+$j = $_POST['tot'];
+
+$wis= $_POST['wis'];
+
+$sql ="INSERT INTO `paket`.`pos`
+            (`id`,
+             `tgl`,
+             `nm`,
+             `al`,
+             `em`,
+             `hp`,
+             `wis`,
+             `lm`,
+             `hrg`,
+             `jml`,
+             `tglt`,
+             `total`,
+             `status`)
+VALUES ('$a',
+        NOW(),
+        '$b',
+        '$c',
+        '$d',
+        '$e',
+        '$wis',
+        '$f',
+        '$g',
+        '$h',
+        '$i',
+        '$j',
+        'open');";
+        if ($conn->query($sql)) {
+              
+              echo '<script type="text/javascript">
+
+                          alert("Data berhasil dikirim !");
+
+                          </script>';
+        }
+
+?>
+
+<form action="book2.php" method="POST">
+	<div class="col-sm-offset-3 col-sm-5">
+         <div class="thumbnail">
+           <div class="caption">
+             <h3><?php echo " ID Transaksi Anda : ".$a;?></h3>
+             <h5><?php echo " Tanggal Transaksi Anda : ".date('Y-m-d');?></h5>
+             <hr>
+             <table class="table table-striped">
+             <tr>
+             	<td>Nama</td>
+             		<td><input class="form-control" type="text"  disabled value="<?php echo  $b; ?>"></td>
+             </tr>
+             <tr>
+             	<td>Alamat</td>
+             		<td><input class="form-control" type="text"  disabled value="<?php echo  $c; ?>"></td>
+             </tr>
+             <tr>
+             	<td>E-mail</td>
+             		<td><input class="form-control" type="text"  disabled value="<?php echo  $d; ?>"></td>
+             </tr>
+             <tr>
+             	<td>No. Hp</td>
+             		<td><input class="form-control" type="text"  disabled value="<?php echo  $e; ?>"></td>
+             </tr>
+             	<tr>
+             		<td>Lama Tour</td>
+             		<td><input class="form-control" type="text"  disabled value="<?php echo  $f; ?>"></td>
+             	</tr>
+             	<tr>
+             		<td>Harga / pax</td>
+             		<td><input class="form-control" type="text"  disabled value="<?php echo  number_format($g); ?>"></td>
+             	</tr>
+                  <tr>
+                        <td>Jumlah Orang</td>
+                        <td><input class="form-control" type="text"  disabled value="<?php echo  number_format($h); ?>"></td>
+                  </tr>
+             	<tr>
+             		<td>Tanggal Tour</td>
+             		<td><input class="form-control" type="text"  disabled value="<?php echo  $i; ?>"></td>
+             	</tr>
+             	
+             	<tr>
+             		<td>Total Bayar</td>
+             		<td><input class="form-control" type="text"  disabled value="<?php echo  number_format($j); ?>"></td>
+             	</tr>
+             </table>
+             <p><a target="_BLANK" href="index.php" class="btn btn-primary" role="button">Kembali</a>
+             <a href="admin/pdf/examples/data-cus.php?kd=<?php echo  $a; ?>" class="btn btn-danger" role="button">Print</a>
+           </div>
+         </div>
+       </div>		
+</form>
